@@ -4,7 +4,7 @@
 **Test Scenario: Missing Query Parameter**
 
 - Send GET request to https://api.openbrewerydb.org/v1/breweries/search or https://api.openbrewerydb.org/v1/breweries/autocomplete without any query parameters <br><br>
-**Expected Result:** response with error message or error status code is received
+**Expected Result:** response with error message or error status code 
 
 ---
 **Test Scenario: Invalid Query Value**
@@ -12,16 +12,16 @@
 - Send GET request to https://api.openbrewerydb.org/v1/breweries/search or https://api.openbrewerydb.org/v1/breweries/autocomplete 
 with invalid query parameter value that does not match any of the fields values in the JSON objects. <br>
 For example add "query=&&&&&&&&&&&&&&&&&&&&&&&&" as a query parameter. <br> <br>
-  **Expected Result:** empty result(empty JSON array). Status code is 200.
+  **Expected Result:** response with empty result(empty JSON array). Status code is 200.
 ---
 
-<i>Since some fields in JSON objects can have null type values :</i> <br><br>
+<i>Since some fields in JSON objects can have null type values:</i> <br><br>
 
 **Test Scenario: Search by Null Value**
 
 Verify that by entering a query parameter with a null value:
 - Send GET request to https://api.openbrewerydb.org/v1/breweries/search or https://api.openbrewerydb.org/v1/breweries/autocomplete with query parameter: "query=null". <br><br>
-  **Expected Result:** Array of JSON objects with fields that contain null values. Status code is 200. <br>
+  **Expected Result:** response returns an Array of JSON objects with fields that contain null values. Status code is 200. <br>
 *This case covered in checkSearchResults() method
 ---
 
@@ -29,12 +29,12 @@ Verify that by entering a query parameter with a null value:
 - Send GET request to https://api.openbrewerydb.org/v1/breweries/search or https://api.openbrewerydb.org/v1/breweries/autocomplete 
 with query parameter other than "query" <br>
 For example: add **"name=dog"** as a query parameter<br><br>
-**Expected Result:** empty result(empty JSON array). Status code is 200.
+**Expected Result:** response with empty result(empty JSON array). Status code is 200.
 ---
 
 **Test Scenario: Incorrect Endpoint Format**
- - Send GET request to invalid endpoint. For example: https://api.openbrewerydb.org/v1/search <br><br>
-**Expected Result:** response contains error message. Status code is 404.
+ - Send GET request to an invalid endpoint. For example: https://api.openbrewerydb.org/v1/search <br><br>
+**Expected Result:** response contains an error message. Status code is 404.
 ---
 
 **Test Scenario: Multiple Parameters(one invalid)** 
@@ -43,18 +43,15 @@ Example: "query=dog,per_page=$$$$$$$$$" <br><br>
   **Expected Result:** response contains error message
 ---
 
----
-
 
 It would also be good to check, but since I don't have any requirements for this I consider it redundant for this task:
 - to check if the returned values in the json object meet the requirements, for example: that the phone number has a specific length and consists of only digits
 
+---
 
 
 
-
-
-#2. "List Breweries" method
+# 2. "List Breweries" method
 
 **Scope of Automation:** Since these are API tests, it will be appropriate to cover all or most of them with autotests:
 this will be especially effective for large amounts of data and repetitive scenarios.
@@ -82,7 +79,7 @@ Future automation tests will be based on test scenarios:
 - Equivalence partitioning: (Example: per_page parameter had max value = 200, so I can test it with 1, 200 (positive) and  0, 201 (negative) and 100 (number in range))
 
 
-###Automation approach details:
+### Automation approach details:
 
 1. Building test automation framework: using **Java** programming language
 2. Test creation and execution: **TestNG** to create and execute tests, using the @Test annotation to mark tests.
@@ -97,8 +94,8 @@ This can be implemented with **TestNG @DataProvider** - it will allow to run tes
 or "threadPoolSize" attribute (set inside the @Test annotation) but given the small number of tests it is optional.
 
 
-###Estimated time for completing this task: 
-Writing all automation tests: up to 20 hours
-Preparation of the test scenarious + project setup + CI/CD setup: up to 8-10 hours
+### Estimated time for completing this task: 
+Writing all automation tests: up to 20 hours <br>
+Preparation of the test scenarios + project setup + CI/CD setup: up to 8-10 hours <br>
 
 Project setup +  test scenarios + all automation tests creation based on the + CI/CD setup: 25-30 hours
